@@ -548,6 +548,63 @@ body {
     margin-top: 0.5rem;
 }
 
+/* Display the original paper PDFs within the existing figure slots. */
+.pdf-figure {
+    margin: 0;
+    overflow: hidden;
+    background: white;
+}
+
+.experiment-row-chart .pdf-figure {
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+.pdf-figure-link {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--figure-ratio, 4 / 3);
+    color: var(--primary-color);
+}
+
+.pdf-figure canvas {
+    display: block;
+    visibility: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.pdf-figure.is-rendered canvas {
+    visibility: visible;
+}
+
+.pdf-figure-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.pdf-figure.is-rendered .pdf-figure-fallback {
+    display: none;
+}
+
+.resource-pending {
+    cursor: default;
+    opacity: 0.65;
+}
+
+.alignment-summary {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
 .publication-body img {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-md);

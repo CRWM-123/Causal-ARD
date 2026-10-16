@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CRWM: Causal Reward World Model</title>
+  <link rel="icon" href="data:,">
+  <title>Causal-ARD: Zero-shot Reward Design for Automated Skill Generation</title>
+  <meta name="description" content="Causal-ARD learns a reusable reward causal prior from offline source-task data to guide zero-shot automated reward design for unseen robotic tasks.">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -25,7 +27,7 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
           <h1 class="publication-title">
-            <span class="publication-title-primary">Causal Reward World Models</span>
+            <span class="publication-title-primary">Causal-ARD</span>
             <span class="publication-title-secondary">Zero-shot Reward Design for Automated Skill Generation</span>
           </h1>
           
@@ -51,28 +53,28 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="" class="external-link button is-normal is-rounded is-dark">
+                <span class="external-link button is-normal is-rounded is-dark resource-pending" aria-disabled="true">
                   <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
+                  <span>arXiv (coming soon)</span>
+                </span>
               </span>
               <span class="link-block">
-                <a href="" class="external-link button is-normal is-rounded is-dark">
+                <a href="static/pdfs/Causal-ARD.pdf" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
                   <span>Paper</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                <span class="external-link button is-normal is-rounded is-dark resource-pending" aria-disabled="true">
                   <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code (coming soon)</span>
-                </a>
+                  <span>Code (after peer review)</span>
+                </span>
               </span>
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                <span class="external-link button is-normal is-rounded is-dark resource-pending" aria-disabled="true">
                   <span class="icon"><i class="fas fa-database"></i></span>
                   <span>HuggingFace (coming soon)</span>
-                </a>
+                </span>
               </span>
             </div>
           </div>
@@ -89,7 +91,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Automated Reward Design (ARD) aims to replace manual reward engineering in reinforcement learning with language-driven reward function synthesis. However, existing approaches based on large language models (LLMs) remain inherently correlation-driven, relying on iterative environmental feedback to refine reward hypotheses for each specific task. This paradigm not only results in inefficient reasoning but also makes LLMs susceptible to semantically plausible yet causally spurious reward components, leading to ineffective optimization. To address these limitations, we propose the Causal Reward World Model (CRWM), which explicitly models the causal topological relationships between candidate reward components and task-targeted physical variables through offline pre-training on multi-task interaction data. Based on a coarse-to-fine pre-training strategy, we introduce a Joint Optimization Module that integrates Explicit Mechanism Decoupling with Confidence-Aware Soft Fusion to refine coarse structural priors using micro-level trajectories, thereby constructing robust and interpretable causal skeleton. During inference, LLMs leverage CRWM as a task-irrelevant causal prior to constrain the reward generation, enabling zero-shot reward function design. Our work opens up a new white-box paradigm for the ARD problem. Extensive experiments on complex continuous control benchmarks demonstrate that CRWM generates executable reward functions without feedback-driven reward refinement, significantly reducing the design latency for acquiring new robotic skills while matching or surpassing state-of-the-art performance, and further exhibits strong generalization capabilities across unseen tasks and diverse robotic embodiments.
+            Automated Reward Design (ARD) aims to replace manual reward engineering in reinforcement learning with language-driven reward function synthesis. However, existing approaches based on large language models (LLMs) often rely on semantic associations and iterative environmental feedback to refine task-specific reward hypotheses. This paradigm not only results in inefficient reasoning but also makes LLMs susceptible to semantically plausible yet causally spurious reward components, leading to ineffective optimization. To address these limitations, we propose Causal-ARD, a zero-shot ARD framework that learns transferable causal guidance from offline multi-task interaction data and uses it to constrain reward construction for unseen tasks. Causal-ARD first estimates a coarse reward causal prior from controlled reward-component interventions, and then introduces a joint optimization module that integrates Explicit Mechanism Decoupling with Confidence-Aware Soft Fusion to refine this prior using micro-level trajectories. The resulting prior provides reward-relevant structural guidance while accounting for state-dependent variations in the offline trajectories. During inference, Causal-ARD serializes the refined reward causal prior into explicit constraints that guide an LLM to select supported reward components, prune terms unsupported by the supplied prior, and synthesize executable reward code in a single pass. Our work establishes an interpretable, causal-prior-guided formulation of the ARD problem. Extensive experiments on complex continuous control benchmarks demonstrate that Causal-ARD generates effective rewards without feedback-driven refinement, avoids target-task evolutionary search, achieves performance comparable to the evaluated iterative methods, and generalizes across unseen tasks and diverse robotic embodiments.
           </p>
         </div>
       </div>
@@ -118,13 +120,18 @@
   <div class="container is-max-fullhd">
     <div class="columns is-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3 has-text-centered">CRWM</h2>
+        <h2 class="title is-3 has-text-centered">Reward Causal Prior</h2>
         <div class="has-text-centered">
-          <img src="static/images/CRWM.png" class="framework-img" alt="Visualization of the CRWM">
+          <figure class="pdf-figure framework-img" data-pdf="static/pdfs/figures/reward-causal-prior.pdf" style="--figure-ratio: 837.073 / 581.45">
+            <a class="pdf-figure-link" href="static/pdfs/figures/reward-causal-prior.pdf" target="_blank" rel="noopener" aria-label="Open Reward causal prior learned by Causal-ARD (PDF)">
+              <canvas role="img" aria-label="Reward causal prior learned by Causal-ARD"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
         <div class="content has-text-justified mt-4">
           <p>
-            <strong>Visualization of the CRWM.</strong> The background graph shows the task-invariant causal skeleton, where the red node denotes the score. The four insets present subgraphs corresponding to different tasks, illustrating the relevant structures within the CRWM. Directed edges indicate causal relationships, and edge weights represent the corresponding causal effects.
+            <strong>Visualization of the reward causal prior.</strong> The shared graph provides reward-relevant structural guidance learned from multi-task offline data. The four insets illustrate task-specific component selections. The red score node represents macro-level task fitness and is separate from the physical variables reconstructed from trajectories. Directed relations and their weights guide reward construction, rather than representing an identified model of the complete physical dynamics.
           </p>
         </div>
       </div>
@@ -138,11 +145,16 @@
       <div class="column is-full-width">
         <h2 class="title is-3 has-text-centered">Framework</h2>
         <div class="has-text-centered">
-          <img src="static/images/method.png" class="framework-img" alt="CRWM Framework">
+          <figure class="pdf-figure framework-img" data-pdf="static/pdfs/figures/method_tsmc.pdf" style="--figure-ratio: 960 / 540">
+            <a class="pdf-figure-link" href="static/pdfs/figures/method_tsmc.pdf" target="_blank" rel="noopener" aria-label="Open Causal-ARD framework (PDF)">
+              <canvas role="img" aria-label="Causal-ARD framework"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
         <div class="content has-text-justified mt-4">
           <p>
-            <strong>Overview of the Causal Reward World Model (CRWM) framework.</strong> The pipeline consists of three synergistic phases: (1) Structural Prior Extraction: The offline interventional dataset is split into macroscopic and microscopic streams. A pre-trained causal foundation model, LimiX, processes the macroscopic data to extract the initial coarse structural prior. (2) Joint Optimization Module: The Explicit Mechanism Decoupling (EMD) module constructs the instantaneous topology by combining a learnable causal skeleton with state-dependent transient physical interactions. Subsequently, the Joint Optimization Module uses microscopic data and Confidence-Aware Soft Fusion to refine the coarse structural prior, account for transient physical interactions during reconstruction, and distill the final CRWM. (3) Causal-ARD: The final CRWM is combined with unseen task information and used as a causal prior for LLM-based reward generation. Through explicit causal pruning, the LLM synthesizes executable zero-shot reward functions.
+            <strong>Overview of Causal-ARD.</strong> The pipeline consists of three phases: (1) <strong>Structural Prior Extraction:</strong> Reward-weight interventions produce macro-level configurations and fitness scores, while policy rollouts provide micro-level physical-variable trajectories. A LimiX-based estimator supplies a coarse structural prior. (2) <strong>Joint Optimization:</strong> Explicit Mechanism Decoupling (EMD) introduces state-dependent coefficient modulation, while Confidence-Aware Soft Fusion calibrates the coarse prior using transition data. The fusion weights represent relative score magnitudes rather than calibrated statistical confidence. (3) <strong>Reward Construction:</strong> The refined prior, target-task description, and available observations guide component selection and executable reward-code generation in a single pass without feedback-driven refinement.
           </p>
         </div>
       </div>
@@ -175,11 +187,16 @@
                 <source src="static/videos/experiments/ShadowHandCatchAbreast.mp4" type="video/mp4">
               </video>
             </div>
-            <p class="compare-side-label compare-side-label--good">CRWM<br><span class="compare-side-sublabel">(evolutionary-search-free)</span></p>
+            <p class="compare-side-label compare-side-label--good">Causal-ARD<br><span class="compare-side-sublabel">(ESI = 0)</span></p>
           </div>
         </div>
         <div class="experiment-row-chart">
-          <img src="static/images/experiments/ShadowHandCatchAbreast.png" class="experiment-figure-img" alt="ShadowHandCatchAbreast">
+          <figure class="pdf-figure experiment-figure-img" data-pdf="static/pdfs/figures/catch_abreast.pdf" style="--figure-ratio: 582.845625 / 408.489484375">
+            <a class="pdf-figure-link" href="static/pdfs/figures/catch_abreast.pdf" target="_blank" rel="noopener" aria-label="Open ShadowHandCatchAbreast success rate and evolutionary search iterations (PDF)">
+              <canvas role="img" aria-label="ShadowHandCatchAbreast success rate and evolutionary search iterations"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
       </div>
       <p class="experiment-caption has-text-centered">ShadowHandCatchAbreast</p>
@@ -204,11 +221,16 @@
                 <source src="static/videos/experiments/ShadowHandCatchOver2Underarm.mp4" type="video/mp4">
               </video>
             </div>
-            <p class="compare-side-label compare-side-label--good">CRWM<br><span class="compare-side-sublabel">(evolutionary-search-free)</span></p>
+            <p class="compare-side-label compare-side-label--good">Causal-ARD<br><span class="compare-side-sublabel">(ESI = 0)</span></p>
           </div>
         </div>
         <div class="experiment-row-chart">
-          <img src="static/images/experiments/ShadowHandCatchOver2Underarm.png" class="experiment-figure-img" alt="ShadowHandCatchOver2Underarm">
+          <figure class="pdf-figure experiment-figure-img" data-pdf="static/pdfs/figures/catch_over_2underarm.pdf" style="--figure-ratio: 582.845625 / 408.489484375">
+            <a class="pdf-figure-link" href="static/pdfs/figures/catch_over_2underarm.pdf" target="_blank" rel="noopener" aria-label="Open ShadowHandCatchOver2Underarm success rate and evolutionary search iterations (PDF)">
+              <canvas role="img" aria-label="ShadowHandCatchOver2Underarm success rate and evolutionary search iterations"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
       </div>
       <p class="experiment-caption has-text-centered">ShadowHandCatchOver2Underarm</p>
@@ -233,17 +255,22 @@
                 <source src="static/videos/experiments/ShadowHandPen.mp4" type="video/mp4">
               </video>
             </div>
-            <p class="compare-side-label compare-side-label--good">CRWM<br><span class="compare-side-sublabel">(evolutionary-search-free)</span></p>
+            <p class="compare-side-label compare-side-label--good">Causal-ARD<br><span class="compare-side-sublabel">(ESI = 0)</span></p>
           </div>
         </div>
         <div class="experiment-row-chart">
-          <img src="static/images/experiments/ShadowHandPen.png" class="experiment-figure-img" alt="ShadowHandPen">
+          <figure class="pdf-figure experiment-figure-img" data-pdf="static/pdfs/figures/pen.pdf" style="--figure-ratio: 582.845625 / 408.489484375">
+            <a class="pdf-figure-link" href="static/pdfs/figures/pen.pdf" target="_blank" rel="noopener" aria-label="Open ShadowHandPen success rate and evolutionary search iterations (PDF)">
+              <canvas role="img" aria-label="ShadowHandPen success rate and evolutionary search iterations"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
       </div>
       <p class="experiment-caption has-text-centered">ShadowHandPen</p>
     </div>
 
-    <h3 class="title is-4 experiment-subsection-title has-text-centered">Maniskill2</h3>
+    <h3 class="title is-4 experiment-subsection-title has-text-centered">ManiSkill2</h3>
 
     <div class="experiment-row-card">
       <div class="experiment-row-body">
@@ -264,11 +291,16 @@
                 <source src="static/videos/experiments/PickCube.mp4" type="video/mp4">
               </video>
             </div>
-            <p class="compare-side-label compare-side-label--good">CRWM<br><span class="compare-side-sublabel">(evolutionary-search-free)</span></p>
+            <p class="compare-side-label compare-side-label--good">Causal-ARD<br><span class="compare-side-sublabel">(ESI = 0)</span></p>
           </div>
         </div>
         <div class="experiment-row-chart">
-          <img src="static/images/experiments/PickCube.png" class="experiment-figure-img" alt="PickCube">
+          <figure class="pdf-figure experiment-figure-img" data-pdf="static/pdfs/figures/pickcube.pdf" style="--figure-ratio: 582.845625 / 408.2318864209">
+            <a class="pdf-figure-link" href="static/pdfs/figures/pickcube.pdf" target="_blank" rel="noopener" aria-label="Open PickCube success rate and evolutionary search iterations (PDF)">
+              <canvas role="img" aria-label="PickCube success rate and evolutionary search iterations"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
       </div>
       <p class="experiment-caption has-text-centered">PickCube</p>
@@ -293,11 +325,16 @@
                 <source src="static/videos/experiments/TurnFaucet.mp4" type="video/mp4">
               </video>
             </div>
-            <p class="compare-side-label compare-side-label--good">CRWM<br><span class="compare-side-sublabel">(evolutionary-search-free)</span></p>
+            <p class="compare-side-label compare-side-label--good">Causal-ARD<br><span class="compare-side-sublabel">(ESI = 0)</span></p>
           </div>
         </div>
         <div class="experiment-row-chart">
-          <img src="static/images/experiments/TurnFaucet.png" class="experiment-figure-img" alt="TurnFaucet">
+          <figure class="pdf-figure experiment-figure-img" data-pdf="static/pdfs/figures/TurnFaucet.pdf" style="--figure-ratio: 582.845625 / 408.3394985207">
+            <a class="pdf-figure-link" href="static/pdfs/figures/TurnFaucet.pdf" target="_blank" rel="noopener" aria-label="Open TurnFaucet success rate and evolutionary search iterations (PDF)">
+              <canvas role="img" aria-label="TurnFaucet success rate and evolutionary search iterations"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
       </div>
       <p class="experiment-caption has-text-centered">TurnFaucet</p>
@@ -322,17 +359,22 @@
                 <source src="static/videos/experiments/OpenCabinetDrawer.mp4" type="video/mp4">
               </video>
             </div>
-            <p class="compare-side-label compare-side-label--good">CRWM<br><span class="compare-side-sublabel">(evolutionary-search-free)</span></p>
+            <p class="compare-side-label compare-side-label--good">Causal-ARD<br><span class="compare-side-sublabel">(ESI = 0)</span></p>
           </div>
         </div>
         <div class="experiment-row-chart">
-          <img src="static/images/experiments/OpenCabinetDrawer.png" class="experiment-figure-img" alt="OpenCabinetDrawer">
+          <figure class="pdf-figure experiment-figure-img" data-pdf="static/pdfs/figures/OpenCabinetDrawer.pdf" style="--figure-ratio: 582.845625 / 408.3394985207">
+            <a class="pdf-figure-link" href="static/pdfs/figures/OpenCabinetDrawer.pdf" target="_blank" rel="noopener" aria-label="Open OpenCabinetDrawer success rate and evolutionary search iterations (PDF)">
+              <canvas role="img" aria-label="OpenCabinetDrawer success rate and evolutionary search iterations"></canvas>
+              <span class="pdf-figure-fallback">Open figure (PDF)</span>
+            </a>
+          </figure>
         </div>
       </div>
       <p class="experiment-caption has-text-centered">OpenCabinetDrawer</p>
     </div>
 
-    <h3 class="title is-4 experiment-subsection-title has-text-centered">Sim2Real</h3>
+    <h3 class="title is-4 experiment-subsection-title has-text-centered">Offline Reward Alignment on Real-World Trajectories</h3>
     <div class="columns is-multiline">
       <div class="column is-one-third">
         <div class="experiment-item experiment-item--realworld-pair">
@@ -369,7 +411,7 @@
               </video>
             </div>
           </div>
-          <p class="experiment-caption has-text-centered">ShadowHandLiftUnderarm</p>
+          <p class="experiment-caption has-text-centered">LiftUnderarm</p>
         </div>
       </div>
       <div class="column is-one-third">
@@ -388,32 +430,33 @@
               </video>
             </div>
           </div>
-          <p class="experiment-caption has-text-centered">ShadowHandScissors</p>
+          <p class="experiment-caption has-text-centered">Scissors</p>
         </div>
       </div>
     </div>
 
     <div class="columns is-centered mt-6">
       <div class="column">
-        <h2 class="title is-4">Quantitative Comparison</h2>
+        <h2 class="title is-4">Offline Reward Alignment</h2>
+        <p class="alignment-summary">Rewards are evaluated on human-teleoperated CASBOT W1 trajectories, with 25 successful and 25 failed trajectories per task. Mean AUC measures whether successful trajectories receive higher time-normalized mean rewards. This evaluation supports offline reward alignment; it does not demonstrate closed-loop policy learning or sim-to-real deployment.</p>
         <table class="table is-fullwidth is-striped is-hoverable">
           <thead>
             <tr>
               <th>Method</th>
               <th>AUC (Mean)</th>
-              <th>Reward Stability</th>
+              <th>Evaluation</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Baseline</td>
+              <td>ZS-LLM</td>
               <td>53.9%</td>
-              <td>Low</td>
+              <td>Offline trajectories</td>
             </tr>
             <tr>
-              <td><strong>CRWM</strong></td>
+              <td><strong>Causal-ARD</strong></td>
               <td><strong>96.5%</strong></td>
-              <td><strong>High</strong></td>
+              <td>Offline trajectories</td>
             </tr>
           </tbody>
         </table>
@@ -429,7 +472,7 @@
         <h2 class="title is-3">Conclusions</h2>
         <div class="content has-text-justified">
           <p>
-            In this work, we present Causal Reward World Models (CRWM) for zero-shot automated reward design. Instead of relying on iterative reward refinement, CRWM distills a reusable reward-relevant causal skeleton from offline multi-task data and uses it as an explicit structural prior for LLM-based reward generation. By accounting for state-dependent transient interactions during distillation, CRWM guides the LLM to prune spurious reward terms and synthesize executable rewards in a single pass. Experiments across unseen tasks, different embodiments, and real-world settings show that CRWM-guided rewards achieve strong performance without deployment-time evolutionary search. These results suggest that incorporating reward-relevant causal structure is a promising direction for improving the robustness and efficiency of automated reward design.
+            In this work, we present Causal-ARD, a framework for zero-shot automated reward design. Instead of relying on iterative reward refinement, Causal-ARD learns a reusable reward causal prior from offline multi-task data and uses it to constrain LLM-based reward construction. By combining a reward-relevant structural prior with state-dependent modulation, Causal-ARD selects reward components and synthesizes executable rewards in a single pass. Experiments across unseen simulated tasks and different embodiments show strong task performance without deployment-time evolutionary search; offline evaluation on real-world trajectories supports reward alignment. These results support reusing offline structural guidance to reduce feedback-driven reward search on new tasks.
           </p>
         </div>
       </div>
@@ -445,5 +488,6 @@
   </div>
 </footer>
 
+  <script type="module" src="static/js/pdf-figures.js"></script>
 </body>
 </html>
